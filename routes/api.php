@@ -17,3 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//Routes de Passport
+Route::post('login', 'PassportController@login');
+Route::post('register', 'PassportController@register');
+
+Route::middleware('auth:api')->group(function () {
+    Route::get('user', 'PassportController@details');
+    Route::resource('products', 'ProductController');
+});
