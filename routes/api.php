@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaintingController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\PassportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,14 +22,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //Routes de Passport
-Route::post('login', 'PassportController@login');
-Route::post('register', 'PassportController@register');
 
-Route::middleware('auth:api')->group(function () {
-    Route::get('user', 'PassportController@details');
-    Route::resource('products', 'ProductController');
-});
-
+Route::post('login', [PassportController::class, 'login']);
+Route::post('register', [PassportController::class, 'register']);
 
 //Endpoints para la API
 
