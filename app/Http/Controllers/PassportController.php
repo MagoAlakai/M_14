@@ -43,18 +43,30 @@ class PassportController extends Controller
     public function login(Request $request)
     {
 
-        $login = $request->validate([
-            'email' => 'required|string',
-            'password' => 'required|string',
-        ]);
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password
+        ];
 
-        if(!Auth::attempt($login)){
-            return response(['message' => 'Invalid login credentials']);
+        if (Auth::attempt($credentials)) {
+            $token = Auth::user()->createToken('authToken')->accessToken;
+            return response()->json(['user' => Auth::user(), 'token' => $token], 200);
+        } else {
+            return response()->json(['error' => 'UnAuthorised'], 401);
         }
 
-        $accessToken = Auth::user()->createToken('authToken')->accesToken;
+        // $login = $request->validate([
+        //     'email' => 'required|string',
+        //     'password' => 'required|string',
+        // ]);
 
-        return response(['user' => Auth::user(), 'access_token' => $accessToken]);
+        // if(!Auth::attempt($login)){
+        //     return response(['message' => 'Invalid login credentials']);
+        // }
+
+        // $token = Auth::user()->createToken('authToken')->token;
+
+        // return response(['user' => Auth::user(), 'token' => $token]);
     }
     /**
      * Returns Authenticated User Details
