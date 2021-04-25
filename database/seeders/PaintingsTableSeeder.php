@@ -18,7 +18,7 @@ class PaintingsTableSeeder extends Seeder
 
         $faker = \Faker\Factory::create();
 
-        for($i = 0; $i < 10; $i++){
+        for($i = 0; $i < 20; $i++){
             Painting::create([
                 'name' => $faker->sentence,
                 'price' => $faker->randomDigit(2),

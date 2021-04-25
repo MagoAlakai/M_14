@@ -42,6 +42,7 @@ class PassportController extends Controller
 
     public function login(Request $request)
     {
+        //dd($request);
 
         $credentials = [
             'email' => $request->email,
@@ -52,8 +53,10 @@ class PassportController extends Controller
             $token = Auth::user()->createToken('authToken')->accessToken;
             return response()->json(['user' => Auth::user(), 'token' => $token], 200);
         } else {
-            return response()->json(['error' => 'UnAuthorised'], 401);
+            return response()->json(['error' => 'UnAuthorisedjg'], 401);
         }
+
+
 
         // $login = $request->validate([
         //     'email' => 'required|string',

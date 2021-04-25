@@ -63,7 +63,7 @@ Route::post('paintings', [PaintingController::class, 'store']);
 //Update painting
 Route::put('paintings/{id}', [PaintingController::class, 'update']);
 
-//Delete shop
+//Delete paintings
 Route::delete('paintings/{id}', [PaintingController::class, 'delete']);
 
 //Delete all paintings in a shop
